@@ -4,12 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de Estudiantes</title>
-    <script type="module" src="app.js" defer></script>
-    <link rel="stylesheet" href="style.css"> <!-- Opcional -->
+    <!-- Firebase SDK -->
+    <script defer src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js"></script>
+    <script defer src="app.js"></script> <!-- Archivo app.js -->
+    <link rel="stylesheet" href="style.css"> <!-- Opcional para estilos -->
 </head>
 <body>
     <h1>Gestión de Estudiantes</h1>
-    
+
     <h2>Agregar Estudiante</h2>
     <form id="add-student-form">
         <input type="text" id="student-id" placeholder="ID del estudiante" required>
