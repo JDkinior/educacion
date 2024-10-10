@@ -7,7 +7,8 @@
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore-compat.js"></script>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="frontend/styles.css">
+
 </head>
 <body>
     <h1>Gestión de Estudiantes y Profesores</h1>
@@ -79,8 +80,9 @@
     <button id="delete-teacher-btn">Eliminar Profesor</button>
 
     <!-- Cargar primero la configuración de Firebase desde el backend -->
-    <script src="../backend/firebaseConfig.js"></script>
+    <script src="/backend/firebaseConfig.js"></script>
     <!-- Cargar la lógica del frontend -->
-    <script src="app.js"></script>
+    <script src="frontend/app.js"></script>
+
 </body>
 </html>
