@@ -30,16 +30,16 @@ Antes de empezar, asegúrate de tener instalado:
 Crea un archivo firebaseConfig.js en la carpeta backend y coloca allí la configuración de Firebase que obtienes desde la consola de Firebase.
 Ejemplo del archivo [firebaseConfig.js]:
 
-const firebaseConfig = {
-    apiKey: "AIzaSyA7yepF-8cAVkQJfCi3ClmfpDldU0GzbbM",
-    authDomain: "educacion-1225b.firebaseapp.com",
-    databaseURL: "https://educacion-1225b-default-rtdb.firebaseio.com",
-    projectId: "educacion-1225b",
-    storageBucket: "educacion-1225b.appspot.com",
-    messagingSenderId: "965775350789",
-    appId: "1:965775350789:web:af28339485696e84c6506c",
-    measurementId: "G-NSXK8QQ63H"
-};
+    const firebaseConfig = {
+        apiKey: "AIzaSyA7yepF-8cAVkQJfCi3ClmfpDldU0GzbbM",
+        authDomain: "educacion-1225b.firebaseapp.com",
+        databaseURL: "https://educacion-1225b-default-rtdb.firebaseio.com",
+        projectId: "educacion-1225b",
+        storageBucket: "educacion-1225b.appspot.com",
+        messagingSenderId: "965775350789",
+        appId: "1:965775350789:web:af28339485696e84c6506c",
+        measurementId: "G-NSXK8QQ63H"
+    };
 
 ## Inicia el servidor de desarrollo:
 En este caso se cargó en netlify
