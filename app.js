@@ -1,110 +1,111 @@
-// Importar funciones necesarias de Firebase y Firestore
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
-import { getFirestore, doc, setDoc, getDocs, updateDoc, deleteDoc, getDoc, collection } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Configuración de Firebase
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-    apiKey: "AIzaSyC6KxCX-APw_PSp27pxeKIvFAtQKfB6-pc",
-    authDomain: "ecomerce-c17d0.firebaseapp.com",
-    projectId: "ecomerce-c17d0",
-    storageBucket: "ecomerce-c17d0.appspot.com",
-    messagingSenderId: "119722744036",
-    appId: "1:119722744036:web:79c5c6420f0622ecaab4f1",
-    measurementId: "G-017ZMYZD81"
+  apiKey: "AIzaSyA7yepF-8cAVkQJfCi3ClmfpDldU0GzbbM",
+  authDomain: "educacion-1225b.firebaseapp.com",
+  projectId: "educacion-1225b",
+  storageBucket: "educacion-1225b.appspot.com",
+  messagingSenderId: "965775350789",
+  appId: "1:965775350789:web:2d70b680a8e07c09c6506c",
+  measurementId: "G-TLVMR2BXQP"
 };
 
-// Inicializar Firebase
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
-
-// Inicializar Firestore
-const db = getFirestore(app);
+const analytics = getAnalytics(app);
 
 // Función para agregar un estudiante
-async function addStudent(studentId, firstName, lastName, email) {
+const addStudentForm = document.getElementById('add-student-form');
+addStudentForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const studentId = document.getElementById('student-id').value;
+    const firstName = document.getElementById('first-name').value;
+    const lastName = document.getElementById('last-name').value;
+    const email = document.getElementById('email').value;
+
+    console.log("Datos del estudiante:", studentId, firstName, lastName, email); // Agrega este console.log
+
     try {
-        await setDoc(doc(db, "students", studentId), {
+        await addDoc(collection(db, "estudiantes"), {
             id: studentId,
             firstName: firstName,
             lastName: lastName,
             email: email
         });
-        console.log("Estudiante agregado exitosamente");
-        loadStudents(); // Recargar lista de estudiantes
-    } catch (e) {
-        console.error("Error al agregar estudiante: ", e);
-    }
-}
-
-// Función para cargar lista de estudiantes
-async function loadStudents() {
-    const studentList = document.getElementById('student-list');
-    studentList.innerHTML = ''; // Limpiar la lista
-
-    try {
-        const querySnapshot = await getDocs(collection(db, "students"));
-        querySnapshot.forEach((doc) => {
-            const student = doc.data();
-            const li = document.createElement('li');
-            li.textContent = `${student.id}: ${student.firstName} ${student.lastName} (${student.email})`;
-            studentList.appendChild(li);
-        });
+        alert('Estudiante agregado');
     } catch (error) {
-        console.error("Error al cargar estudiantes: ", error);
+        console.error("Error al agregar estudiante: ", error);
     }
+});
+
+// Función para listar estudiantes
+const studentList = document.getElementById('student-list');
+async function getStudents() {
+    const querySnapshot = await getDocs(collection(db, "estudiantes"));
+    studentList.innerHTML = ''; // Limpiar la lista
+    querySnapshot.forEach((doc) => {
+        const li = document.createElement('li');
+        li.textContent = `${doc.data().id}: ${doc.data().firstName} ${doc.data().lastName} - ${doc.data().email}`;
+        studentList.appendChild(li);
+    });
 }
+getStudents(); // Cargar estudiantes al cargar la página
 
 // Función para buscar un estudiante
-document.getElementById('search-btn').addEventListener('click', async function () {
-    const studentId = document.getElementById('search-id').value;
-    const searchResult = document.getElementById('search-result');
-    searchResult.innerHTML = ''; // Limpiar resultados anteriores
+const searchBtn = document.getElementById('search-btn');
+searchBtn.addEventListener('click', async () => {
+    const searchId = document.getElementById('search-id').value;
+    const querySnapshot = await getDocs(collection(db, "estudiantes"));
+    const resultDiv = document.getElementById('search-result');
+    resultDiv.innerHTML = ''; // Limpiar resultados previos
 
-    try {
-        const docSnap = await getDoc(doc(db, "students", studentId));
-        if (docSnap.exists()) {
-            const student = docSnap.data();
-            searchResult.textContent = `Encontrado: ${student.id}: ${student.firstName} ${student.lastName} (${student.email})`;
-        } else {
-            searchResult.textContent = "No se encontró el estudiante";
+    querySnapshot.forEach((doc) => {
+        if (doc.data().id === searchId) {
+            resultDiv.textContent = `${doc.data().firstName} ${doc.data().lastName} - ${doc.data().email}`;
         }
-    } catch (error) {
-        console.error("Error al buscar estudiante: ", error);
-    }
+    });
 });
 
 // Función para actualizar un estudiante
-document.getElementById('update-btn').addEventListener('click', async function () {
-    const studentId = document.getElementById('update-id').value;
-    const firstName = document.getElementById('update-first-name').value;
-    const lastName = document.getElementById('update-last-name').value;
-    const email = document.getElementById('update-email').value;
+const updateBtn = document.getElementById('update-btn');
+updateBtn.addEventListener('click', async () => {
+    const updateId = document.getElementById('update-id').value;
+    const updateFirstName = document.getElementById('update-first-name').value;
+    const updateLastName = document.getElementById('update-last-name').value;
+    const updateEmail = document.getElementById('update-email').value;
 
-    try {
-        const studentRef = doc(db, "students", studentId);
-        await updateDoc(studentRef, {
-            firstName: firstName,
-            lastName: lastName,
-            email: email
-        });
-        console.log("Estudiante actualizado exitosamente");
-        loadStudents(); // Recargar lista de estudiantes
-    } catch (e) {
-        console.error("Error al actualizar estudiante: ", e);
-    }
+    const querySnapshot = await getDocs(collection(db, "estudiantes"));
+    querySnapshot.forEach(async (docSnap) => {
+        if (docSnap.data().id === updateId) {
+            const docRef = doc(db, "estudiantes", docSnap.id);
+            await updateDoc(docRef, {
+                firstName: updateFirstName,
+                lastName: updateLastName,
+                email: updateEmail
+            });
+            alert('Estudiante actualizado');
+        }
+    });
 });
 
 // Función para eliminar un estudiante
-document.getElementById('delete-btn').addEventListener('click', async function () {
-    const studentId = document.getElementById('delete-id').value;
+const deleteBtn = document.getElementById('delete-btn');
+deleteBtn.addEventListener('click', async () => {
+    const deleteId = document.getElementById('delete-id').value;
 
-    try {
-        await deleteDoc(doc(db, "students", studentId));
-        console.log("Estudiante eliminado exitosamente");
-        loadStudents(); // Recargar lista de estudiantes
-    } catch (e) {
-        console.error("Error al eliminar estudiante: ", e);
-    }
+    const querySnapshot = await getDocs(collection(db, "estudiantes"));
+    querySnapshot.forEach(async (docSnap) => {
+        if (docSnap.data().id === deleteId) {
+            const docRef = doc(db, "estudiantes", docSnap.id);
+            await deleteDoc(docRef);
+            alert('Estudiante eliminado');
+        }
+    });
 });
-
-// Cargar lista de estudiantes al cargar la página
-window.onload = loadStudents;
