@@ -7,19 +7,18 @@ import { getAnalytics } from "firebase/analytics";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyA7yepF-8cAVkQJfCi3ClmfpDldU0GzbbM",
-  authDomain: "educacion-1225b.firebaseapp.com",
-  projectId: "educacion-1225b",
-  storageBucket: "educacion-1225b.appspot.com",
-  messagingSenderId: "965775350789",
-  appId: "1:965775350789:web:2d70b680a8e07c09c6506c",
-  measurementId: "G-TLVMR2BXQP"
-};
-
+    apiKey: "AIzaSyA7yepF-8cAVkQJfCi3ClmfpDldU0GzbbM",
+    authDomain: "educacion-1225b.firebaseapp.com",
+    databaseURL: "https://educacion-1225b-default-rtdb.firebaseio.com",
+    projectId: "educacion-1225b",
+    storageBucket: "educacion-1225b.appspot.com",
+    messagingSenderId: "965775350789",
+    appId: "1:965775350789:web:8ed4079c0ef9572fc6506c",
+    measurementId: "G-Y619BEBQR0"
+  };
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
-
 // Div para mostrar los mensajes
 const messageDiv = document.getElementById('message');
 
