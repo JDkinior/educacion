@@ -20,6 +20,9 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
+// Div para mostrar los mensajes
+const messageDiv = document.getElementById('message');
+
 // Función para agregar un estudiante
 const addStudentForm = document.getElementById('add-student-form');
 addStudentForm.addEventListener('submit', async (e) => {
@@ -30,25 +33,29 @@ addStudentForm.addEventListener('submit', async (e) => {
     const lastName = document.getElementById('last-name').value;
     const email = document.getElementById('email').value;
 
-    console.log("Datos del estudiante:", studentId, firstName, lastName, email); // Agrega este console.log
-
     try {
-        await addDoc(collection(db, "estudiantes"), {
+        await db.collection("estudiantes").add({
             id: studentId,
             firstName: firstName,
             lastName: lastName,
             email: email
         });
-        alert('Estudiante agregado');
+
+        // Mostrar mensaje de éxito
+        messageDiv.style.color = 'green';
+        messageDiv.textContent = `El estudiante ${firstName} ${lastName} ha sido agregado correctamente.`;
+        addStudentForm.reset(); // Limpiar el formulario
     } catch (error) {
-        console.error("Error al agregar estudiante: ", error);
+        // Mostrar mensaje de error
+        messageDiv.style.color = 'red';
+        messageDiv.textContent = `Error al agregar el estudiante: ${error.message}`;
     }
 });
 
 // Función para listar estudiantes
 const studentList = document.getElementById('student-list');
 async function getStudents() {
-    const querySnapshot = await getDocs(collection(db, "estudiantes"));
+    const querySnapshot = await db.collection("estudiantes").get();
     studentList.innerHTML = ''; // Limpiar la lista
     querySnapshot.forEach((doc) => {
         const li = document.createElement('li');
@@ -62,10 +69,10 @@ getStudents(); // Cargar estudiantes al cargar la página
 const searchBtn = document.getElementById('search-btn');
 searchBtn.addEventListener('click', async () => {
     const searchId = document.getElementById('search-id').value;
-    const querySnapshot = await getDocs(collection(db, "estudiantes"));
     const resultDiv = document.getElementById('search-result');
     resultDiv.innerHTML = ''; // Limpiar resultados previos
 
+    const querySnapshot = await db.collection("estudiantes").get();
     querySnapshot.forEach((doc) => {
         if (doc.data().id === searchId) {
             resultDiv.textContent = `${doc.data().firstName} ${doc.data().lastName} - ${doc.data().email}`;
@@ -81,16 +88,17 @@ updateBtn.addEventListener('click', async () => {
     const updateLastName = document.getElementById('update-last-name').value;
     const updateEmail = document.getElementById('update-email').value;
 
-    const querySnapshot = await getDocs(collection(db, "estudiantes"));
+    const querySnapshot = await db.collection("estudiantes").get();
     querySnapshot.forEach(async (docSnap) => {
         if (docSnap.data().id === updateId) {
-            const docRef = doc(db, "estudiantes", docSnap.id);
-            await updateDoc(docRef, {
+            const docRef = db.collection("estudiantes").doc(docSnap.id);
+            await docRef.update({
                 firstName: updateFirstName,
                 lastName: updateLastName,
                 email: updateEmail
             });
-            alert('Estudiante actualizado');
+            messageDiv.style.color = 'green';
+            messageDiv.textContent = `Estudiante actualizado correctamente.`;
         }
     });
 });
@@ -100,12 +108,13 @@ const deleteBtn = document.getElementById('delete-btn');
 deleteBtn.addEventListener('click', async () => {
     const deleteId = document.getElementById('delete-id').value;
 
-    const querySnapshot = await getDocs(collection(db, "estudiantes"));
+    const querySnapshot = await db.collection("estudiantes").get();
     querySnapshot.forEach(async (docSnap) => {
         if (docSnap.data().id === deleteId) {
-            const docRef = doc(db, "estudiantes", docSnap.id);
-            await deleteDoc(docRef);
-            alert('Estudiante eliminado');
+            const docRef = db.collection("estudiantes").doc(docSnap.id);
+            await docRef.delete();
+            messageDiv.style.color = 'green';
+            messageDiv.textContent = `Estudiante eliminado correctamente.`;
         }
     });
 });
