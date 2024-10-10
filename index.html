@@ -5,14 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de Estudiantes</title>
     <!-- Firebase SDK -->
-    <script defer src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
-    <script defer src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js"></script>
-    <script defer src="app.js"></script> <!-- Archivo app.js -->
-    <link rel="stylesheet" href="style.css"> <!-- Opcional para estilos -->
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js"></script>
+    <script type="module" src="app.js"></script>
+    <link rel="stylesheet" href="style.css"> <!-- Revisa que esta ruta sea correcta -->
 </head>
 <body>
     <h1>Gestión de Estudiantes</h1>
 
+    <!-- Agregar Estudiante -->
     <h2>Agregar Estudiante</h2>
     <form id="add-student-form">
         <input type="text" id="student-id" placeholder="ID del estudiante" required>
@@ -22,17 +23,19 @@
         <button type="submit">Agregar Estudiante</button>
     </form>
 
-    <!-- Aquí se mostrará el mensaje de éxito o error -->
-    <div id="message" style="margin-top: 20px;"></div>
+    <div id="message"></div> <!-- Mensajes de éxito o error -->
 
+    <!-- Listar Estudiantes -->
     <h2>Listar Estudiantes</h2>
     <ul id="student-list"></ul>
 
+    <!-- Buscar Estudiante -->
     <h2>Buscar Estudiante</h2>
     <input type="text" id="search-id" placeholder="ID del estudiante">
     <button id="search-btn">Buscar</button>
     <div id="search-result"></div>
 
+    <!-- Actualizar Estudiante -->
     <h2>Actualizar Estudiante</h2>
     <input type="text" id="update-id" placeholder="ID del estudiante" required>
     <input type="text" id="update-first-name" placeholder="Nombres" required>
@@ -40,6 +43,7 @@
     <input type="email" id="update-email" placeholder="Email" required>
     <button id="update-btn">Actualizar Estudiante</button>
 
+    <!-- Eliminar Estudiante -->
     <h2>Eliminar Estudiante</h2>
     <input type="text" id="delete-id" placeholder="ID del estudiante">
     <button id="delete-btn">Eliminar Estudiante</button>
