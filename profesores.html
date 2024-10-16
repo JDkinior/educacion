@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Profesores</title>
+    <link rel="stylesheet" href="frontend/styles.css">
+</head>
+<body>
+    <h1>Gestión de Profesores</h1>
+    <nav><a href="index.html">Volver al Inicio</a></nav>
+
+    <h2>Agregar Profesor</h2>
+    <form id="add-teacher-form">
+        <input type="text" id="teacher-first-name" placeholder="Nombres" required>
+        <input type="text" id="teacher-last-name" placeholder="Apellidos" required>
+        <input type="email" id="teacher-email" placeholder="Email" required>
+        <button type="submit">Agregar Profesor</button>
+    </form>
+    <div id="teacher-message"></div>
+
+    <h2>Listar Profesores</h2>
+    <ul id="teacher-list"></ul>
+
+    <h2>Buscar Profesor</h2>
+    <input type="text" id="search-teacher-id" placeholder="ID del profesor" required>
+    <button id="search-teacher-btn">Buscar Profesor</button>
+    <div id="search-teacher-result"></div>
+
+    <h2>Actualizar Profesor</h2>
+    <input type="text" id="update-teacher-id" placeholder="ID del profesor" disabled required>
+    <input type="text" id="update-teacher-first-name" placeholder="Nombres" required>
+    <input type="text" id="update-teacher-last-name" placeholder="Apellidos" required>
+    <input type="email" id="update-teacher-email" placeholder="Email" required>
+    <button id="update-teacher-btn">Actualizar Profesor</button>
+
+    <h2>Eliminar Profesor</h2>
+    <input type="text" id="delete-teacher-id" placeholder="ID del profesor">
+    <button id="delete-teacher-btn">Eliminar Profesor</button>
+
+    <!-- Cargar primero la configuración de Firebase -->
+    <script src="/backend/firebaseConfig.js"></script>
+    <!-- Lógica de profesores -->
+    <script src="frontend/profesores.js"></script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Estudiantes</title>
+    <link rel="stylesheet" href="frontend/styles.css">
+</head>
+<body>
+    <h1>Gestión de Estudiantes</h1>
+    <nav><a href="index.html">Volver al Inicio</a></nav>
+
+    <h2>Agregar Estudiante</h2>
+    <form id="add-student-form">
+        <input type="text" id="first-name" placeholder="Nombres" required>
+        <input type="text" id="last-name" placeholder="Apellidos" required>
+        <input type="email" id="email" placeholder="Email" required>
+        <button type="submit">Agregar Estudiante</button>
+    </form>
+    <div id="student-message"></div>
+
+    <h2>Listar Estudiantes</h2>
+    <ul id="student-list"></ul>
+
+    <h2>Buscar Estudiante</h2>
+    <input type="text" id="search-student-id" placeholder="ID del estudiante" required>
+    <button id="search-student-btn">Buscar Estudiante</button>
+    <div id="search-student-result"></div>
+
+    <h2>Actualizar Estudiante</h2>
+    <input type="text" id="update-student-id" placeholder="ID del estudiante" disabled required>
+    <input type="text" id="update-student-first-name" placeholder="Nombres" required>
+    <input type="text" id="update-student-last-name" placeholder="Apellidos" required>
+    <input type="email" id="update-student-email" placeholder="Email" required>
+    <button id="update-student-btn">Actualizar Estudiante</button>
+
+    <h2>Eliminar Estudiante</h2>
+    <input type="text" id="delete-student-id" placeholder="ID del estudiante">
+    <button id="delete-student-btn">Eliminar Estudiante</button>
+
+    <!-- Cargar primero la configuración de Firebase -->
+    <script src="/backend/firebaseConfig.js"></script>
+    <!-- Lógica de estudiantes -->
+    <script src="frontend/estudiantes.js"></script>
+</body>
+</html>
