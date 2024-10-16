@@ -1,10 +1,6 @@
 // Archivo: /backend/firebaseConfig.js
 
-// Importar funciones de Firebase (versión modular)
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.x.x/firebase-app.js";
-import { getFirestore, collection, addDoc, onSnapshot, doc, updateDoc, deleteDoc, getDoc } from "https://www.gstatic.com/firebasejs/9.x.x/firebase-firestore.js";
-
-// Configuración de Firebase
+// Inicialización de Firebase
 const firebaseConfig = {
     apiKey: "AIzaSyA7yepF-8cAVkQJfCi3ClmfpDldU0GzbbM",
     authDomain: "educacion-1225b.firebaseapp.com",
@@ -17,7 +13,7 @@ const firebaseConfig = {
 };
 
 // Inicializar Firebase
-const app = initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
 
 // Inicializar Firestore
-const db = getFirestore(app);
+const db = firebase.firestore();
