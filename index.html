@@ -123,5 +123,29 @@
     <h2>Eliminar Curso</h2>
     <input type="text" id="delete-course-id" placeholder="ID del curso">
     <button id="delete-course-btn">Eliminar Curso</button>
+
+    <!-- Sección para asignar estudiantes a cursos -->
+    <h2>Asignar Estudiantes a Cursos</h2>
+    <form id="assign-student-course-form">
+        <select id="select-course" required>
+            <option value="">Seleccionar Curso</option>
+            <!-- Aquí se poblará con los cursos existentes -->
+        </select>
+        <select id="select-student" required>
+            <option value="">Seleccionar Estudiante</option>
+            <!-- Aquí se poblará con los estudiantes existentes -->
+        </select>
+        <button type="submit">Asignar Estudiante al Curso</button>
+    </form>
+    <div id="assign-student-course-message"></div>
+
+    <!-- Listar estudiantes asignados a un curso -->
+    <h2>Estudiantes Asignados a Curso</h2>
+    <select id="select-course-view" required>
+        <option value="">Seleccionar Curso</option>
+        <!-- Aquí se poblará con los cursos existentes -->
+    </select>
+    <button id="view-students-btn">Ver Estudiantes Asignados</button>
+    <ul id="student-course-list"></ul>
 </body>
 </html>
