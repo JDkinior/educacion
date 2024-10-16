@@ -188,56 +188,57 @@ deleteTeacherBtn.addEventListener('click', async () => {
 
 
 
-// Llenar el menú desplegable de profesores
-function populateProfessorDropdown() {
-    const courseProfessorSelect = document.getElementById('course-professor');
+    // Llenar el menú desplegable de profesores en tiempo real
+    function populateProfessorDropdownRealtime() {
+        const courseProfessorSelect = document.getElementById('course-professor');
         
-    // Limpiar el menú para evitar duplicados
-    courseProfessorSelect.innerHTML = '<option value="">Seleccionar Profesor</option>';
-        
-    db.collection('profesores').get().then((snapshot) => {
-        snapshot.forEach((doc) => {
-            const professor = doc.data();
-            const option = document.createElement('option');
-            option.value = doc.id; // Guardar el ID del profesor como valor
-            option.textContent = `${professor.firstName} ${professor.lastName}`;
-            courseProfessorSelect.appendChild(option);
+        // Escuchar los cambios en la colección 'profesores'
+        db.collection('profesores').onSnapshot((snapshot) => {
+            // Limpiar el menú para evitar duplicados
+            courseProfessorSelect.innerHTML = '<option value="">Seleccionar Profesor</option>';
+            
+            snapshot.forEach((doc) => {
+                const professor = doc.data();
+                const option = document.createElement('option');
+                option.value = doc.id; // Guardar el ID del profesor como valor
+                option.textContent = `${professor.firstName} ${professor.lastName}`;
+                courseProfessorSelect.appendChild(option);
+            });
+        }, (error) => {
+            console.error('Error al cargar los profesores en tiempo real: ', error);
         });
-    }).catch((error) => {
-        console.error('Error al cargar los profesores: ', error);
+    }
+
+    // Llamar a la función para poblar el menú desplegable en tiempo real
+    populateProfessorDropdownRealtime();
+
+
+    // Manejar el formulario de agregar curso
+    const addCourseForm = document.getElementById('add-course-form');
+    addCourseForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const courseName = document.getElementById('course-name').value;
+        const courseCode = document.getElementById('course-code').value;
+        const courseProfessor = document.getElementById('course-professor').value;
+
+        if (!courseProfessor) {
+            document.getElementById('course-message').innerText = 'Por favor selecciona un profesor.';
+            return;
+        }
+
+        try {
+            await db.collection('cursos').add({
+                courseName,
+                courseCode,
+                courseProfessor
+            });
+            document.getElementById('course-message').innerText = 'Curso agregado exitosamente.';
+            addCourseForm.reset();
+        } catch (error) {
+            document.getElementById('course-message').innerText = 'Error al agregar curso: ' + error.message;
+        }
     });
-}
-
-// Llamar a la función para poblar el menú desplegable
-populateProfessorDropdown();
-
-
-// Manejar el formulario de agregar curso
-const addCourseForm = document.getElementById('add-course-form');
-addCourseForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    const courseName = document.getElementById('course-name').value;
-    const courseCode = document.getElementById('course-code').value;
-    const courseProfessor = document.getElementById('course-professor').value;
-
-    if (!courseProfessor) {
-        document.getElementById('course-message').innerText = 'Por favor selecciona un profesor.';
-        return;
-    }
-
-    try {
-        await db.collection('cursos').add({
-            courseName,
-            courseCode,
-            courseProfessor
-        });
-        document.getElementById('course-message').innerText = 'Curso agregado exitosamente.';
-        addCourseForm.reset();
-    } catch (error) {
-        document.getElementById('course-message').innerText = 'Error al agregar curso: ' + error.message;
-    }
-});
 
 
 function listCoursesRealtime() {
