@@ -85,14 +85,21 @@
     <script src="frontend/app.js"></script>
 
     <!-- Sección para cursos -->
+    <!-- Agregar Curso -->
     <h2>Agregar Curso</h2>
     <form id="add-course-form">
-        <input type="text" id="course-name" placeholder="Nombre del curso" required>
-        <input type="text" id="course-code" placeholder="Código del curso" required>
-        <input type="text" id="course-professor" placeholder="Profesor asignado" required>
+        <input type="text" id="course-name" placeholder="Nombre del Curso" required>
+        <input type="text" id="course-code" placeholder="Código del Curso" required>
+        
+        <!-- Menú desplegable para seleccionar un profesor existente -->
+        <select id="course-professor" required>
+            <option value="">Seleccionar Profesor</option>
+        </select>
+        
         <button type="submit">Agregar Curso</button>
     </form>
     <div id="course-message"></div> <!-- Mensajes de éxito o error para cursos -->
+
 
     <!-- Listar Cursos -->
     <h2>Listar Cursos</h2>

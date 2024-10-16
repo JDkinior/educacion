@@ -187,6 +187,31 @@ deleteTeacherBtn.addEventListener('click', async () => {
 });
 
 
+
+// Llenar el menú desplegable de profesores
+function populateProfessorDropdown() {
+    const courseProfessorSelect = document.getElementById('course-professor');
+        
+    // Limpiar el menú para evitar duplicados
+    courseProfessorSelect.innerHTML = '<option value="">Seleccionar Profesor</option>';
+        
+    db.collection('profesores').get().then((snapshot) => {
+        snapshot.forEach((doc) => {
+            const professor = doc.data();
+            const option = document.createElement('option');
+            option.value = doc.id; // Guardar el ID del profesor como valor
+            option.textContent = `${professor.firstName} ${professor.lastName}`;
+            courseProfessorSelect.appendChild(option);
+        });
+    }).catch((error) => {
+        console.error('Error al cargar los profesores: ', error);
+    });
+}
+
+// Llamar a la función para poblar el menú desplegable
+populateProfessorDropdown();
+
+
 // Manejar el formulario de agregar curso
 const addCourseForm = document.getElementById('add-course-form');
 addCourseForm.addEventListener('submit', async (e) => {
@@ -195,6 +220,11 @@ addCourseForm.addEventListener('submit', async (e) => {
     const courseName = document.getElementById('course-name').value;
     const courseCode = document.getElementById('course-code').value;
     const courseProfessor = document.getElementById('course-professor').value;
+
+    if (!courseProfessor) {
+        document.getElementById('course-message').innerText = 'Por favor selecciona un profesor.';
+        return;
+    }
 
     try {
         await db.collection('cursos').add({
