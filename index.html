@@ -84,5 +84,37 @@
     <!-- Cargar la lógica del frontend -->
     <script src="frontend/app.js"></script>
 
+    <!-- Sección para cursos -->
+    <h2>Agregar Curso</h2>
+    <form id="add-course-form">
+        <input type="text" id="course-name" placeholder="Nombre del curso" required>
+        <input type="text" id="course-code" placeholder="Código del curso" required>
+        <input type="text" id="course-professor" placeholder="Profesor asignado" required>
+        <button type="submit">Agregar Curso</button>
+    </form>
+    <div id="course-message"></div> <!-- Mensajes de éxito o error para cursos -->
+
+    <!-- Listar Cursos -->
+    <h2>Listar Cursos</h2>
+    <ul id="course-list"></ul>
+
+    <!-- Buscar Curso -->
+    <h2>Buscar Curso</h2>
+    <input type="text" id="search-course-id" placeholder="ID del curso" required>
+    <button id="search-course-btn">Buscar Curso</button>
+    <div id="search-course-result"></div>
+
+    <!-- Actualizar Curso -->
+    <h2>Actualizar Curso</h2>
+    <input type="text" id="update-course-id" placeholder="ID del curso" disabled required>
+    <input type="text" id="update-course-name" placeholder="Nombre del curso" required>
+    <input type="text" id="update-course-code" placeholder="Código del curso" required>
+    <input type="text" id="update-course-professor" placeholder="Profesor asignado" required>
+    <button id="update-course-btn">Actualizar Curso</button>
+
+    <!-- Eliminar Curso -->
+    <h2>Eliminar Curso</h2>
+    <input type="text" id="delete-course-id" placeholder="ID del curso">
+    <button id="delete-course-btn">Eliminar Curso</button>
 </body>
 </html>
