@@ -185,6 +185,8 @@ deleteTeacherBtn.addEventListener('click', async () => {
 });
 
 
+
+document.addEventListener('DOMContentLoaded', () => {
 // Manejar el formulario de agregar curso
 const addCourseForm = document.getElementById('add-course-form');
 addCourseForm.addEventListener('submit', async (e) => {
@@ -278,8 +280,11 @@ deleteCourseBtn.addEventListener('click', async () => {
     }
 });
 
+
+
 // Llamar a las funciones de listar en tiempo real
 listStudentsRealtime();
 listTeachersRealtime();
 listCoursesRealtime();
 
+});
