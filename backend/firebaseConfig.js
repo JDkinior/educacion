@@ -1,5 +1,9 @@
 // Archivo: /backend/firebaseConfig.js
 
+// Importa las dependencias necesarias de Firebase
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-app.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-firestore.js";
+
 // Inicialización de Firebase
 const firebaseConfig = {
     apiKey: "AIzaSyA7yepF-8cAVkQJfCi3ClmfpDldU0GzbbM",
@@ -16,4 +20,7 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 // Inicializar Firestore
-const db = firebase.firestore();
+
+
+// Inicializa Firestore y exporta la referencia a la base de datos
+export const db = getFirestore(app);
