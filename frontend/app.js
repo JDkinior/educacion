@@ -1,3 +1,5 @@
+document.addEventListener('DOMContentLoaded', () => {
+
 // Manejar el formulario de agregar estudiante
 const addStudentForm = document.getElementById('add-student-form');
 addStudentForm.addEventListener('submit', async (e) => {
@@ -185,8 +187,6 @@ deleteTeacherBtn.addEventListener('click', async () => {
 });
 
 
-
-document.addEventListener('DOMContentLoaded', () => {
 // Manejar el formulario de agregar curso
 const addCourseForm = document.getElementById('add-course-form');
 addCourseForm.addEventListener('submit', async (e) => {
