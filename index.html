@@ -4,15 +4,85 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de Estudiantes y Profesores</title>
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore-compat.js"></script>
     <link rel="stylesheet" href="frontend/styles.css">
+
 </head>
 <body>
-    <h1>Página Principal</h1>
-    <nav>
-        <ul>
-            <li><a href="estudiantes.html">Gestionar Estudiantes</a></li>
-            <li><a href="profesores.html">Gestionar Profesores</a></li>
-        </ul>
-    </nav>
+    <h1>Gestión de Estudiantes y Profesores</h1>
+
+    <!-- Sección para estudiantes -->
+    <h2>Agregar Estudiante</h2>
+    <form id="add-student-form">
+        <input type="text" id="first-name" placeholder="Nombres" required>
+        <input type="text" id="last-name" placeholder="Apellidos" required>
+        <input type="email" id="email" placeholder="Email" required>
+        <button type="submit">Agregar Estudiante</button>
+    </form>
+    <div id="student-message"></div> <!-- Mensajes de éxito o error para estudiantes -->
+
+    <!-- Listar Estudiantes -->
+    <h2>Listar Estudiantes</h2>
+    <ul id="student-list"></ul>
+
+    <!-- Buscar Estudiante -->
+    <h2>Buscar Estudiante</h2>
+    <input type="text" id="search-student-id" placeholder="ID del estudiante" required>
+    <button id="search-student-btn">Buscar Estudiante</button>
+    <div id="search-student-result"></div>
+
+    <!-- Actualizar Estudiante -->
+    <h2>Actualizar Estudiante</h2>
+    <input type="text" id="update-student-id" placeholder="ID del estudiante" disabled required>
+    <input type="text" id="update-student-first-name" placeholder="Nombres" required>
+    <input type="text" id="update-student-last-name" placeholder="Apellidos" required>
+    <input type="email" id="update-student-email" placeholder="Email" required>
+    <button id="update-student-btn">Actualizar Estudiante</button>
+
+    <!-- Eliminar Estudiante -->
+    <h2>Eliminar Estudiante</h2>
+    <input type="text" id="delete-student-id" placeholder="ID del estudiante">
+    <button id="delete-student-btn">Eliminar Estudiante</button>
+
+    <!-- Sección para profesores -->
+    <h2>Agregar Profesor</h2>
+    <form id="add-teacher-form">
+        <input type="text" id="teacher-first-name" placeholder="Nombres" required>
+        <input type="text" id="teacher-last-name" placeholder="Apellidos" required>
+        <input type="email" id="teacher-email" placeholder="Email" required>
+        <button type="submit">Agregar Profesor</button>
+    </form>
+    <div id="teacher-message"></div> <!-- Mensajes de éxito o error para profesores -->
+
+    <!-- Listar Profesores -->
+    <h2>Listar Profesores</h2>
+    <ul id="teacher-list"></ul>
+
+    <!-- Buscar Profesor -->
+    <h2>Buscar Profesor</h2>
+    <input type="text" id="search-teacher-id" placeholder="ID del profesor" required>
+    <button id="search-teacher-btn">Buscar Profesor</button>
+    <div id="search-teacher-result"></div>
+
+    <!-- Actualizar Profesor -->
+    <h2>Actualizar Profesor</h2>
+    <input type="text" id="update-teacher-id" placeholder="ID del profesor" disabled required>
+    <input type="text" id="update-teacher-first-name" placeholder="Nombres" required>
+    <input type="text" id="update-teacher-last-name" placeholder="Apellidos" required>
+    <input type="email" id="update-teacher-email" placeholder="Email" required>
+    <button id="update-teacher-btn">Actualizar Profesor</button>
+
+    <!-- Eliminar Profesor -->
+    <h2>Eliminar Profesor</h2>
+    <input type="text" id="delete-teacher-id" placeholder="ID del profesor">
+    <button id="delete-teacher-btn">Eliminar Profesor</button>
+
+    <!-- Cargar primero la configuración de Firebase desde el backend -->
+    <script src="/backend/firebaseConfig.js"></script>
+    <!-- Cargar la lógica del frontend -->
+    <script src="frontend/app.js"></script>
+
 </body>
 </html>
