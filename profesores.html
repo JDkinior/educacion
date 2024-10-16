@@ -8,8 +8,8 @@
 </head>
 <body>
     <h1>Gestión de Profesores</h1>
-    <nav><a href="index.html">Volver al Inicio</a></nav>
 
+    <!-- Sección para agregar profesor -->
     <h2>Agregar Profesor</h2>
     <form id="add-teacher-form">
         <input type="text" id="teacher-first-name" placeholder="Nombres" required>
@@ -19,14 +19,17 @@
     </form>
     <div id="teacher-message"></div>
 
+    <!-- Listar Profesores -->
     <h2>Listar Profesores</h2>
     <ul id="teacher-list"></ul>
 
+    <!-- Buscar Profesor -->
     <h2>Buscar Profesor</h2>
     <input type="text" id="search-teacher-id" placeholder="ID del profesor" required>
     <button id="search-teacher-btn">Buscar Profesor</button>
     <div id="search-teacher-result"></div>
 
+    <!-- Actualizar Profesor -->
     <h2>Actualizar Profesor</h2>
     <input type="text" id="update-teacher-id" placeholder="ID del profesor" disabled required>
     <input type="text" id="update-teacher-first-name" placeholder="Nombres" required>
@@ -34,13 +37,12 @@
     <input type="email" id="update-teacher-email" placeholder="Email" required>
     <button id="update-teacher-btn">Actualizar Profesor</button>
 
+    <!-- Eliminar Profesor -->
     <h2>Eliminar Profesor</h2>
     <input type="text" id="delete-teacher-id" placeholder="ID del profesor">
     <button id="delete-teacher-btn">Eliminar Profesor</button>
 
-    <!-- Cargar primero la configuración de Firebase -->
     <script src="/backend/firebaseConfig.js"></script>
-    <!-- Lógica de profesores -->
-    <script src="frontend/profesores.js"></script>
+    <script src="frontend/app.js"></script>
 </body>
 </html>
