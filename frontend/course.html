@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Cursos</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Gestión de Cursos</h1>
+    <form id="add-course-form">
+        <input type="text" id="course-name" placeholder="Nombre del Curso" required>
+        <input type="text" id="course-code" placeholder="Código del Curso" required>
+        <select id="course-professor" required>
+            <option value="">Seleccionar Profesor</option>
+        </select>
+        <button type="submit">Agregar Curso</button>
+    </form>
+    <div id="course-message"></div>
+    <h2>Listar Cursos</h2>
+    <ul id="course-list"></ul>
+    <h2>Buscar Curso</h2>
+    <input type="text" id="search-course-id" placeholder="ID del curso" required>
+    <button id="search-course-btn">Buscar Curso</button>
+    <div id="search-course-result"></div>
+    <h2>Actualizar Curso</h2>
+    <input type="text" id="update-course-id" placeholder="ID del curso" disabled required>
+    <input type="text" id="update-course-name" placeholder="Nombre del curso" required>
+    <input type="text" id="update-course-code" placeholder="Código del curso" required>
+    <input type="text" id="update-course-professor" placeholder="Profesor asignado" required>
+    <button id="update-course-btn">Actualizar Curso</button>
+    <h2>Eliminar Curso</h2>
+    <input type="text" id="delete-course-id" placeholder="ID del curso">
+    <button id="delete-course-btn">Eliminar Curso</button>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asignación de Cursos</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Asignación de Cursos</h1>
+    <form id="assign-student-course-form">
+        <select id="select-course" required>
+            <option value="">Seleccionar Curso</option>
+        </select>
+        <select id="select-student" required>
+            <option value="">Seleccionar Estudiante</option>
+        </select>
+        <button type="submit">Asignar Estudiante al Curso</button>
+    </form>
+    <div id="assign-student-course-message"></div>
+    <h2>Estudiantes Asignados a Curso</h2>
+    <select id="select-course-view" required>
+        <option value="">Seleccionar Curso</option>
+    </select>
+    <button id="view-students-btn">Ver Estudiantes Asignados</button>
+    <ul id="student-course-list"></ul>
+</body>
+</html>
