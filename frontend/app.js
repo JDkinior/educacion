@@ -1,6 +1,47 @@
 // app.js
 
+import { loginUser, logoutUser, monitorAuthState } from "./authService.js"; 
+
 document.addEventListener('DOMContentLoaded', () => {
+
+        // Variables de la interfaz
+        const loginForm = document.getElementById('login-form');
+        const loginSection = document.getElementById('login-section');
+        const appSection = document.getElementById('app-section');
+        const loginMessage = document.getElementById('login-message');
+    
+        // Manejar inicio de sesión
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            const message = await loginUser(email, password);
+            loginMessage.innerText = message;
+        });
+    
+        // Monitorear el estado de autenticación
+        monitorAuthState((isAuthenticated) => {
+            if (isAuthenticated) {
+                loginSection.style.display = 'none';
+                appSection.style.display = 'block';
+                initApp(); // Inicializar la aplicación si el usuario está autenticado
+            } else {
+                loginSection.style.display = 'block';
+                appSection.style.display = 'none';
+            }
+        });
+    
+        // Función para inicializar la aplicación
+        function initApp() {
+            // Aquí va el código existente de inicialización de la app
+        }
+    
+        // Función de cerrar sesión
+        document.getElementById('logout-btn').addEventListener('click', async () => {
+            const message = await logoutUser();
+            alert(message);
+        });
+        
     // Listeners para el formulario de agregar estudiante
     const addStudentForm = document.getElementById('add-student-form');
     addStudentForm.addEventListener('submit', async (e) => {
