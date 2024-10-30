@@ -13,20 +13,29 @@
 <body>
     <h1>Gestión de Estudiantes y Profesores</h1>
 
-    <!-- Sección de inicio de sesión -->
-    <div id="login-section">
-        <h2>Iniciar Sesión</h2>
-        <form id="login-form">
-            <input type="email" id="login-email" placeholder="Email" required>
-            <input type="password" id="login-password" placeholder="Contraseña" required>
-            <button type="submit">Iniciar Sesión</button>
-        </form>
-        <div id="login-message"></div>
-    </div>
+    <!-- Formulario de Registro -->
+<div id="register-section" style="display: none;">
+    <h2>Registrarse</h2>
+    <form id="register-form">
+        <input type="email" id="register-email" placeholder="Email" required>
+        <input type="password" id="register-password" placeholder="Contraseña" required>
+        <button type="submit">Registrar</button>
+    </form>
+    <div id="register-message"></div>
+    <button id="show-login-btn">Ya tengo una cuenta</button>
+</div>
 
-    <!-- Sección de la aplicación (contenido visible solo para usuarios autenticados) -->
-    <div id="app-section" style="display: none;">
-        <button id="logout-btn">Cerrar Sesión</button>
+<!-- Formulario de Inicio de Sesión -->
+<div id="login-section">
+    <h2>Iniciar Sesión</h2>
+    <form id="login-form">
+        <input type="email" id="login-email" placeholder="Email" required>
+        <input type="password" id="login-password" placeholder="Contraseña" required>
+        <button type="submit">Iniciar Sesión</button>
+    </form>
+    <div id="login-message"></div>
+    <button id="show-register-btn">Crear cuenta nueva</button>
+</div>
 
         <!-- Sección para estudiantes -->
         <h2>Agregar Estudiante</h2>

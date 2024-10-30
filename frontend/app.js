@@ -3,58 +3,82 @@
 import { loginUser, logoutUser, monitorAuthState } from "./authService.js"; 
 
 document.addEventListener('DOMContentLoaded', () => {
+    const loginForm = document.getElementById('login-form');
+    const registerForm = document.getElementById('register-form');
+    const loginSection = document.getElementById('login-section');
+    const registerSection = document.getElementById('register-section');
+    const appSection = document.getElementById('app-section');
+    const loginMessage = document.getElementById('login-message');
+    const registerMessage = document.getElementById('register-message');
+    const showRegisterBtn = document.getElementById('show-register-btn');
+    const showLoginBtn = document.getElementById('show-login-btn');
+    const logoutBtn = document.getElementById('logout-btn');
 
-        // Variables de la interfaz
-        const loginForm = document.getElementById('login-form');
-        const loginSection = document.getElementById('login-section');
-        const appSection = document.getElementById('app-section');
-        const loginMessage = document.getElementById('login-message');
-        const logoutBtn = document.getElementById('logout-btn');
-    
-        // Manejar inicio de sesión
-        loginForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const email = document.getElementById('login-email').value;
-            const password = document.getElementById('login-password').value;
-            
-            const message = await loginUser(email, password);
-            loginMessage.innerText = message;
-    
-            // Si el inicio de sesión es exitoso, mostrar la aplicación
-            if (message === "Inicio de sesión exitoso") {
-                loginSection.style.display = 'none';
-                appSection.style.display = 'block';
-            }
-        });
-    
-        // Monitorear el estado de autenticación
-        monitorAuthState((isAuthenticated) => {
-            if (isAuthenticated) {
-                loginSection.style.display = 'none';   // Oculta el formulario de inicio de sesión
-                appSection.style.display = 'block';    // Muestra el contenido de la app
-                initApp();                             // Inicializar la aplicación (carga de datos, etc.)
-            } else {
-                loginSection.style.display = 'block';  // Muestra el formulario de inicio de sesión
-                appSection.style.display = 'none';     // Oculta el contenido de la app
-            }
-        });
-    
-        // Función para inicializar la aplicación
-        function initApp() {
-            // Aquí puedes colocar las llamadas a funciones de servicios que carguen los datos en tiempo real
-            listStudentsRealtime();
-            listTeachersRealtime();
-            listCoursesRealtime();
-            populateProfessorDropdownRealtime();
+    // Alternar entre las secciones de registro e inicio de sesión
+    showRegisterBtn.addEventListener('click', () => {
+        loginSection.style.display = 'none';
+        registerSection.style.display = 'block';
+    });
+
+    showLoginBtn.addEventListener('click', () => {
+        registerSection.style.display = 'none';
+        loginSection.style.display = 'block';
+    });
+
+    // Manejar registro de usuario
+    registerForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('register-email').value;
+        const password = document.getElementById('register-password').value;
+        
+        const message = await registerUser(email, password);
+        registerMessage.innerText = message;
+        
+        if (message === "Registro exitoso") {
+            registerSection.style.display = 'none';
+            loginSection.style.display = 'block';
+            loginMessage.innerText = "Usuario registrado, ahora puedes iniciar sesión.";
         }
-    
-        // Cerrar sesión
-        logoutBtn.addEventListener('click', async () => {
-            const message = await logoutUser();
-            alert(message);
+    });
+
+    // Manejar inicio de sesión
+    loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('login-email').value;
+        const password = document.getElementById('login-password').value;
+        
+        const message = await loginUser(email, password);
+        loginMessage.innerText = message;
+    });
+
+    // Monitorear el estado de autenticación
+    monitorAuthState((isAuthenticated) => {
+        if (isAuthenticated) {
+            loginSection.style.display = 'none';
+            registerSection.style.display = 'none';
+            appSection.style.display = 'block';
+            initApp();
+        } else {
             loginSection.style.display = 'block';
             appSection.style.display = 'none';
-        });
+        }
+    });
+
+    // Función para inicializar la aplicación
+    function initApp() {
+        listStudentsRealtime();
+        listTeachersRealtime();
+        listCoursesRealtime();
+        populateProfessorDropdownRealtime();
+    }
+
+    // Cerrar sesión
+    logoutBtn.addEventListener('click', async () => {
+        const message = await logoutUser();
+        alert(message);
+        loginSection.style.display = 'block';
+        appSection.style.display = 'none';
+    });
 
     // Listeners para el formulario de agregar estudiante
     const addStudentForm = document.getElementById('add-student-form');
