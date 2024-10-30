@@ -1,12 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-firebase.auth().onAuthStateChanged((user) => {
-    if (!user) {
-        window.location.href = 'login.html'; // Redirige si no hay usuario autenticado
-    }
-});
-    
-    
 // Manejar el formulario de agregar estudiante
 const addStudentForm = document.getElementById('add-student-form');
 addStudentForm.addEventListener('submit', async (e) => {
