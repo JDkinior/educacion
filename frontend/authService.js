@@ -1,8 +1,19 @@
 // authService.js
 
-import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
 
 const auth = getAuth(); // Inicializa Firebase Auth
+
+// Función para registrar un nuevo usuario
+async function registerUser(email, password) {
+    try {
+        await createUserWithEmailAndPassword(auth, email, password);
+        return "Registro exitoso";
+    } catch (error) {
+        console.error("Error en el registro:", error.message);
+        return "Error en el registro: " + error.message;
+    }
+}
 
 // Función para iniciar sesión
 async function loginUser(email, password) {
@@ -26,15 +37,17 @@ async function logoutUser() {
     }
 }
 
-// Función para monitorear el estado de autenticación y ejecutar un callback
+// Función para monitorear el estado de autenticación
 function monitorAuthState(callback) {
     onAuthStateChanged(auth, (user) => {
         if (user) {
+            console.log("Usuario autenticado:", user);
             callback(true);  // Usuario autenticado
         } else {
+            console.log("Usuario no autenticado");
             callback(false); // Usuario no autenticado
         }
     });
 }
 
-export { loginUser, logoutUser, monitorAuthState };
+export { registerUser, loginUser, logoutUser, monitorAuthState };
