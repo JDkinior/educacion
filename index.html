@@ -8,7 +8,6 @@
     <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore-compat.js"></script>
     <link rel="stylesheet" href="frontend/styles.css">
-
 </head>
 <body>
     <h1>Gestión de Estudiantes y Profesores</h1>
@@ -21,7 +20,7 @@
         <input type="email" id="email" placeholder="Email" required>
         <button type="submit">Agregar Estudiante</button>
     </form>
-    <div id="student-message"></div> <!-- Mensajes de éxito o error para estudiantes -->
+    <div id="student-message"></div>
 
     <!-- Listar Estudiantes -->
     <h2>Listar Estudiantes</h2>
@@ -54,7 +53,7 @@
         <input type="email" id="teacher-email" placeholder="Email" required>
         <button type="submit">Agregar Profesor</button>
     </form>
-    <div id="teacher-message"></div> <!-- Mensajes de éxito o error para profesores -->
+    <div id="teacher-message"></div>
 
     <!-- Listar Profesores -->
     <h2>Listar Profesores</h2>
@@ -79,27 +78,17 @@
     <input type="text" id="delete-teacher-id" placeholder="ID del profesor">
     <button id="delete-teacher-btn">Eliminar Profesor</button>
 
-    <!-- Cargar primero la configuración de Firebase desde el backend -->
-    <script src="/backend/firebaseConfig.js"></script>
-    <!-- Cargar la lógica del frontend -->
-    <script src="frontend/app.js"></script>
-
     <!-- Sección para cursos -->
-    <!-- Agregar Curso -->
     <h2>Agregar Curso</h2>
     <form id="add-course-form">
         <input type="text" id="course-name" placeholder="Nombre del Curso" required>
         <input type="text" id="course-code" placeholder="Código del Curso" required>
-        
-        <!-- Menú desplegable para seleccionar un profesor existente -->
         <select id="course-professor" required>
             <option value="">Seleccionar Profesor</option>
         </select>
-        
         <button type="submit">Agregar Curso</button>
     </form>
-    <div id="course-message"></div> <!-- Mensajes de éxito o error para cursos -->
-
+    <div id="course-message"></div>
 
     <!-- Listar Cursos -->
     <h2>Listar Cursos</h2>
@@ -129,11 +118,9 @@
     <form id="assign-student-course-form">
         <select id="select-course" required>
             <option value="">Seleccionar Curso</option>
-            <!-- Aquí se poblará con los cursos existentes -->
         </select>
         <select id="select-student" required>
             <option value="">Seleccionar Estudiante</option>
-            <!-- Aquí se poblará con los estudiantes existentes -->
         </select>
         <button type="submit">Asignar Estudiante al Curso</button>
     </form>
@@ -143,9 +130,16 @@
     <h2>Estudiantes Asignados a Curso</h2>
     <select id="select-course-view" required>
         <option value="">Seleccionar Curso</option>
-        <!-- Aquí se poblará con los cursos existentes -->
     </select>
     <button id="view-students-btn">Ver Estudiantes Asignados</button>
     <ul id="student-course-list"></ul>
+
+    <!-- Importar scripts -->
+    <script src="/backend/firebaseConfig.js"></script>
+    <script src="/frontend/studentService.js"></script>
+    <script src="/frontend/teacherService.js"></script>
+    <script src="/frontend/courseService.js"></script>
+    <script src="/frontend/assignService.js"></script>
+    <script src="/frontend/app.js"></script>
 </body>
 </html>
