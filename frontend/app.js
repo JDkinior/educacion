@@ -1,26 +1,30 @@
-document.addEventListener('DOMContentLoaded', () => {
-
-// Manejar el formulario de agregar estudiante
-const addStudentForm = document.getElementById('add-student-form');
-addStudentForm.addEventListener('submit', async (e) => {
+document.getElementById('login-form').addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const firstName = document.getElementById('first-name').value;
-    const lastName = document.getElementById('last-name').value;
-    const email = document.getElementById('email').value;
-
+    const email = document.getElementById('login-email').value;
+    const password = document.getElementById('login-password').value;
+    const role = document.getElementById('login-role').value;
+    
     try {
-        await db.collection('estudiantes').add({
-            firstName,
-            lastName,
-            email
-        });
-        document.getElementById('student-message').innerText = 'Estudiante agregado exitosamente.';
-        addStudentForm.reset();
+        // Iniciar sesión con Firebase Authentication
+        const userCredential = await firebase.auth().signInWithEmailAndPassword(email, password);
+        const user = userCredential.user;
+
+        // Verificar el rol en la base de datos de Firestore
+        const userDoc = await firebase.firestore().collection(role + 's').doc(user.uid).get();
+
+        if (userDoc.exists) {
+            document.getElementById('login-message').innerText = 'Inicio de sesión exitoso como ' + role;
+            // Redirigir o mostrar la interfaz correspondiente al rol
+        } else {
+            document.getElementById('login-message').innerText = 'El rol seleccionado no coincide con la cuenta.';
+            firebase.auth().signOut();  // Cerrar sesión si el rol no es correcto
+        }
     } catch (error) {
-        document.getElementById('student-message').innerText = 'Error al agregar estudiante: ' + error.message;
+        document.getElementById('login-message').innerText = 'Error al iniciar sesión: ' + error.message;
     }
-});
+
+
 
 // Manejar el formulario de agregar profesor
 const addTeacherForm = document.getElementById('add-teacher-form');

@@ -11,6 +11,20 @@
 
 </head>
 <body>
+    <h2>Inicio de Sesión</h2>
+    <form id="login-form">
+        <input type="email" id="login-email" placeholder="Email" required>
+        <input type="password" id="login-password" placeholder="Contraseña" required>
+        <select id="login-role" required>
+            <option value="">Seleccionar Rol</option>
+            <option value="estudiante">Estudiante</option>
+            <option value="profesor">Profesor</option>
+        </select>
+        <button type="submit">Iniciar Sesión</button>
+    </form>
+    <div id="login-message"></div>
+    
+
     <h1>Gestión de Estudiantes y Profesores</h1>
 
     <!-- Sección para estudiantes -->
