@@ -57,7 +57,7 @@ form:hover {
 }
 
 input[type="text"], input[type="email"], select {
-  width: 100%; /* Alinea los inputs al ancho del formulario */
+  width: 50%; /* Alinea los inputs al ancho del formulario */
   max-width: 300px; /* Tamaño máximo del input */
   padding: 10px;
   border-radius: 5px;
