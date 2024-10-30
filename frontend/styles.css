@@ -40,10 +40,10 @@ h2 {
 form {
   background-color: #ffffff;
   border-radius: 8px;
-  padding: 15px;
+  padding: 20px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   width: 100%;
-  max-width: 500px;
+  max-width: 400px; /* Ajuste de tamaño del formulario */
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -57,13 +57,15 @@ form:hover {
 }
 
 input[type="text"], input[type="email"], select {
-  width: 100%;
+  width: 100%; /* Alinea los inputs al ancho del formulario */
+  max-width: 300px; /* Tamaño máximo del input */
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #ddd;
   box-sizing: border-box;
   font-size: 1em;
   transition: border-color 0.3s ease;
+  margin: 0 auto; /* Centra el input dentro del formulario */
 }
 
 input[type="text"]:focus, input[type="email"]:focus, select:focus {
