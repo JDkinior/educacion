@@ -9,39 +9,53 @@ document.addEventListener('DOMContentLoaded', () => {
         const loginSection = document.getElementById('login-section');
         const appSection = document.getElementById('app-section');
         const loginMessage = document.getElementById('login-message');
+        const logoutBtn = document.getElementById('logout-btn');
     
         // Manejar inicio de sesión
         loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const email = document.getElementById('login-email').value;
             const password = document.getElementById('login-password').value;
+            
             const message = await loginUser(email, password);
             loginMessage.innerText = message;
+    
+            // Si el inicio de sesión es exitoso, mostrar la aplicación
+            if (message === "Inicio de sesión exitoso") {
+                loginSection.style.display = 'none';
+                appSection.style.display = 'block';
+            }
         });
     
         // Monitorear el estado de autenticación
         monitorAuthState((isAuthenticated) => {
             if (isAuthenticated) {
-                loginSection.style.display = 'none';
-                appSection.style.display = 'block';
-                initApp(); // Inicializar la aplicación si el usuario está autenticado
+                loginSection.style.display = 'none';   // Oculta el formulario de inicio de sesión
+                appSection.style.display = 'block';    // Muestra el contenido de la app
+                initApp();                             // Inicializar la aplicación (carga de datos, etc.)
             } else {
-                loginSection.style.display = 'block';
-                appSection.style.display = 'none';
+                loginSection.style.display = 'block';  // Muestra el formulario de inicio de sesión
+                appSection.style.display = 'none';     // Oculta el contenido de la app
             }
         });
     
         // Función para inicializar la aplicación
         function initApp() {
-            // Aquí va el código existente de inicialización de la app
+            // Aquí puedes colocar las llamadas a funciones de servicios que carguen los datos en tiempo real
+            listStudentsRealtime();
+            listTeachersRealtime();
+            listCoursesRealtime();
+            populateProfessorDropdownRealtime();
         }
     
-        // Función de cerrar sesión
-        document.getElementById('logout-btn').addEventListener('click', async () => {
+        // Cerrar sesión
+        logoutBtn.addEventListener('click', async () => {
             const message = await logoutUser();
             alert(message);
+            loginSection.style.display = 'block';
+            appSection.style.display = 'none';
         });
-        
+
     // Listeners para el formulario de agregar estudiante
     const addStudentForm = document.getElementById('add-student-form');
     addStudentForm.addEventListener('submit', async (e) => {

@@ -2,9 +2,10 @@
 
 import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
 
+const auth = getAuth(); // Inicializa Firebase Auth
+
 // Función para iniciar sesión
 async function loginUser(email, password) {
-    const auth = getAuth();
     try {
         await signInWithEmailAndPassword(auth, email, password);
         return "Inicio de sesión exitoso";
@@ -16,7 +17,6 @@ async function loginUser(email, password) {
 
 // Función para cerrar sesión
 async function logoutUser() {
-    const auth = getAuth();
     try {
         await signOut(auth);
         return "Sesión cerrada";
@@ -26,14 +26,15 @@ async function logoutUser() {
     }
 }
 
-// Función para detectar el estado de autenticación
+// Función para monitorear el estado de autenticación y ejecutar un callback
 function monitorAuthState(callback) {
-    const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
         if (user) {
-            callback(true);
+            callback(true);  // Usuario autenticado
         } else {
-            callback(false);
+            callback(false); // Usuario no autenticado
         }
     });
 }
+
+export { loginUser, logoutUser, monitorAuthState };
